@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fatolu Peter Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="hackathon-banner">
+                <img src="66bc90ba-95ac-457b-a806-8392e34ee377_removalai_preview.png" alt="CAVISTA Hackathon" />
+            </div>
+            <h1>Fatolu Peter Oluwadamilare</h1>
+            <p>Data Analyst | Python Programmer | Content Creator | Graphic Designer | App Developer | Author</p>
+            <input type="file" id="imgUpload" accept="image/*" />
+            <div id="profilePicContainer"><p>No profile picture uploaded yet.</p></div>
+        </header>
+
+        <section class="about">
+            <h2>👋 About Me</h2>
+            <p>I'm passionate about using data and design to solve problems and build useful software. I create tools that simplify analysis for everyone—from beginners to experts.</p>
+        </section>
+
+        <section class="projects">
+            <h2>🔥 Featured Projects</h2>
+            <ul>
+                <li>📊 Telco Churn Analysis – <a href="#">View Project</a></li>
+                <li>🏡 House Price Analysis – <a href="#">View Project</a></li>
+                <li>💳 Card Fraud Detection – <a href="#">View Project</a></li>
+                <li>🧮 Kivy Calculator App – <a href="#">View Project</a></li>
+            </ul>
+        </section>
+
+        <section class="tools">
+            <h2>🛠️ Tools & Technologies</h2>
+            <p>Python, Pandas, Jupyter, Streamlit, Kivy, SQL, Excel, SPSS</p>
+        </section>
+
+        <section class="contact">
+            <h2>🌐 Let's Connect</h2>
+            <ul>
+                <li>📍 Lagos, Nigeria</li>
+                <li>📧 <a href="mailto:oblissman@gmail.com">oblissman@gmail.com</a></li>
+                <li>🔗 <a href="https://www.linkedin.com/in/fatolu-peter">LinkedIn</a></li>
+                <li>💼 <a href="https://github.com/Fatolu-peter">GitHub</a></li>
+                <li>📺 <a href="https://youtube.com/Fatolu-peter">YouTube</a></li>
+                <li>📄 <a href="resume/Fatolu_Peter_Resume.pdf" download>Download My Resume (PDF)</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        const uploadInput = document.getElementById('imgUpload');
+        const picContainer = document.getElementById('profilePicContainer');
+        const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
+        uploadInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            
+            if (!file) return;
+            
+            // Check file type
+            if (!file.type.startsWith('image/')) {
+                picContainer.innerHTML = '<p class="error">Please upload an image file</p>';
+                return;
+            }
+            
+            // Check file size
+            if (file.size > MAX_FILE_SIZE) {
+                picContainer.innerHTML = `<p class="error">File too large (max ${MAX_FILE_SIZE/1024/1024}MB)</p>`;
+                return;
+            }
+            
+            // Show loading state
+            picContainer.innerHTML = '<p class="loading">Uploading...</p>';
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                picContainer.innerHTML = `
+                    <img src="${e.target.result}" 
+                         alt="Profile Picture of Fatolu Peter" 
+                         class="profile-pic"
+                         title="Click to change picture"/>
+                `;
+            };
+            reader.onerror = function() {
+                picContainer.innerHTML = '<p class="error">Error loading image</p>';
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>
